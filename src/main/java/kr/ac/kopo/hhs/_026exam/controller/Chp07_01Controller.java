@@ -1,10 +1,9 @@
 package kr.ac.kopo.hhs._026exam.controller;
 
+import kr.ac.kopo.hhs._026exam.domain.Member;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -20,9 +19,13 @@ public class Chp07_01Controller {
     }
 
     @PostMapping("/form")
-    public String requestFileUploadResult(MultipartHttpServletRequest request, Model model){
-        String name = request.getParameter("name");
-        MultipartFile file = request.getFile("fileImage"); //전송받은 파일
+    public String requestFileUploadResult(@ModelAttribute Member member, Model model){
+//    public String requestFileUploadResult(@RequestParam("name")String name, @RequestParam("fileImage")MultipartFile file, Model model){
+//    public String requestFileUploadResult(MultipartHttpServletRequest request, Model model){
+//        String name = request.getParameter("name");
+//        MultipartFile file = request.getFile("fileImage"); //전송받은 파일
+        String name = member.getName();
+        MultipartFile file = member.getFileImage();
 
         String originFileName = file.getOriginalFilename();
         File saveFile = new File("d:\\upload\\" + name + "_" + originFileName); //내 컴퓨터에 저장할 파일
