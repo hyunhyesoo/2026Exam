@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>유효성 검사 통과 결과</title>
+    <style>
+        span{
+            color: blue;
+            border: 1px dotted blue;
+        }
+    </style>
+</head>
+<body>
+<h2>유효성 검사 통과 결과</h2>
+<p>회원 이름: <span th:text="${person.name}"></span></p>
+<p>회원 나이: <span th:text="${person.age}"></span></p>
+<p>회원 이메일: <span th:text="${person.email}"></span></p>
+</body>
+</html>
