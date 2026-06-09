@@ -16,11 +16,11 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration {
+
     @Bean
     SecurityFilterChain examMethod01(HttpSecurity http){
         http.authorizeHttpRequests(
                 authorize -> authorize
-                        .requestMatchers("/member/**").hasAnyRole("USER", "ADMIN")
                         .requestMatchers("/member/**").hasAnyRole("USER", "ADMIN")
                         .requestMatchers("/manager/**").hasRole("MANAGER")
                         .requestMatchers("/admin/**").hasRole("ADMIN")
@@ -30,18 +30,16 @@ public class SecurityConfiguration {
         return http.build();
     }
 
-    // 암호화 설정
     @Bean
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
 
-    // 사용자 정보 등록 설정
     @Bean
     public UserDetailsService userDetailsService(){
         UserDetails user = User.builder()
                 .username("guest")
-                .password(passwordEncoder().encode("m1234"))
+                .password(passwordEncoder().encode("g1234"))
                 .roles("USER")
                 .build();
 
@@ -53,9 +51,11 @@ public class SecurityConfiguration {
 
         UserDetails admin = User.builder()
                 .username("admin")
-                .password(passwordEncoder().encode("m1234"))
+                .password(passwordEncoder().encode("a1234"))
                 .roles("ADMIN")
                 .build();
+
         return new InMemoryUserDetailsManager(user, manager, admin);
     }
+
 }
