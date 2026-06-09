@@ -39,7 +39,6 @@ public class Chp10_01Controller {
 
     @GetMapping("/home/main")
     public String requestMethod5(Model model){
-        model.addAttribute("viewName", "homePage.html");
         return "homePage";
     }
 
@@ -48,7 +47,7 @@ public class Chp10_01Controller {
         return "redirect:/member/user";
     }
 
-    @GetMapping("/memver/user")
+    @GetMapping("/member/user")
     public String requestMethod7(Authentication authentication, Model model){
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         String userName = userDetails.getUsername();
@@ -56,12 +55,13 @@ public class Chp10_01Controller {
         model.addAttribute("userName", userName);
         model.addAttribute("password", password);
         model.addAttribute("uri", "/member/user");
-        Collection<? extends GrantedAuthority> authorities = userDetails.getAuthorities();
-        for (GrantedAuthority item : authorities){
+        Collection<? extends GrantedAuthority>  authorities = userDetails.getAuthorities();
+        for(GrantedAuthority item : authorities){
             model.addAttribute("role", item + " ");
         }
 
         return "viewPage10_02";
     }
+
 }
 
