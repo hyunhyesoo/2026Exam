@@ -18,19 +18,6 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfiguration {
 
     @Bean
-    SecurityFilterChain examMethod01(HttpSecurity http){
-        http.authorizeHttpRequests(
-                authorize -> authorize
-                        .requestMatchers("/exam10_01/member/**").hasAnyRole("USER", "ADMIN")
-                        .requestMatchers("/exam10_01/manager/**").hasRole("MANAGER")
-                        .requestMatchers("/exam10_01/admin/**").hasRole("ADMIN")
-                        .anyRequest().permitAll()
-        ).formLogin(Customizer.withDefaults());
-
-        return http.build();
-    }
-
-    @Bean
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
@@ -56,6 +43,19 @@ public class SecurityConfiguration {
                 .build();
 
         return new InMemoryUserDetailsManager(user, manager, admin);
+    }
+
+    @Bean
+    SecurityFilterChain examMethod01(HttpSecurity http){
+        http.authorizeHttpRequests(
+                authorize -> authorize
+                        .requestMatchers("/exam10_01/member/**").hasAnyRole("USER", "ADMIN")
+                        .requestMatchers("/exam10_01/manager/**").hasRole("MANAGER")
+                        .requestMatchers("/exam10_01/admin/**").hasRole("ADMIN")
+                        .anyRequest().permitAll()
+        ).formLogin(Customizer.withDefaults());
+
+        return http.build();
     }
 
 }

@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+
 import java.util.Collection;
 
 @Controller
@@ -41,27 +42,46 @@ public class Chp10_01Controller {
     public String requestMethod5(Model model){
         return "homePage";
     }
-
     @GetMapping("/exam02")
     public String requestMethod6(Model model){
-        return "redirect:/member/user";
-    }
+        return "redirect:/exam10_01/member/user";
 
+
+    }
     @GetMapping("/member/user")
-    public String requestMethod7(Authentication authentication, Model model){
+    public String requestMethod7(Authentication authentication, Model model) {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+
         String userName = userDetails.getUsername();
         String password = userDetails.getPassword();
+
         model.addAttribute("userName", userName);
         model.addAttribute("password", password);
         model.addAttribute("uri", "/member/user");
-        Collection<? extends GrantedAuthority>  authorities = userDetails.getAuthorities();
-        for(GrantedAuthority item : authorities){
+
+        Collection<? extends GrantedAuthority> authorities = userDetails.getAuthorities();
+        for (GrantedAuthority item : authorities) {
             model.addAttribute("role", item + " ");
         }
 
         return "viewPage10_02";
     }
 
-}
+    @GetMapping("/exam03")
+    public String requestMethod8(Model model){
+        return "viewPage10_03";
+    }
+    @GetMapping("/manager/tag")
+    public String requestMethod9(Model model){
+        return "viewPage10_03";
+    }
 
+    @GetMapping("/exam04")
+    public String requestMethod10(Model model){
+        return "viewPage10_04";
+    }
+    @GetMapping("/admin/tag")
+    public String requestMethod11(Model model){
+        return "viewPage10_04";
+    }
+}
