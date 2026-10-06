@@ -47,4 +47,10 @@ public class Chap14_01Controller {
         repository.save(member3);
         return "redirect:/exam14_01";
     }
+
+    @GetMapping("/delete/{id}")
+    public String deleteMember(@PathVariable(name = "id")int id){
+        repository.deleteById(id);
+        return "redirect:/exam14_01";
+    }
 }
