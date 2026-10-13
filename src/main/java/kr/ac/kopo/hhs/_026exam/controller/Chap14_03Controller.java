@@ -41,7 +41,7 @@ public class Chap14_03Controller {
         Iterable<Detail> detailList = detailRepository.findAll();
 
         model.addAttribute("product2List", product2List);
-        model.addAttribute("detail", detailList);
+        model.addAttribute("detailList", detailList);
         return "viewPage04";
     }
 }

@@ -4,7 +4,7 @@
 </head>
 <body>
 <div align="center">
-	<h3>JPA 데이터베이스 실습1</h3>
+	<h3>JPA 데이터베이스 실습1 일대일관계</h3>
 	<a th:href="@{/exam14_03/new}">Member 데이터 삽입</a> <br>
 	<br> Product
 	<table border="1" cellpadding="10">
@@ -17,7 +17,6 @@
 			<td th:text="${product.id}"></td>
 			<td th:text="${product.name}"></td>
 			<td th:text="${product.price}"></td>
-				<a th:href="@{'/exam14_03/delete/' + ${product.id}}" onclick="return confirm('정말 삭제하시겠습니까?');">Delete</a>
 		</tr>
 	</table>
 
@@ -36,7 +35,6 @@
 			<td th:text="${detail.weight}"></td>
 			<td th:text="${detail.height}"></td>
 			<td th:text="${detail.width}"></td>
-			<a th:href="@{'/exam14_03/delete/' + ${detail.id}}" onclick="return confirm('정말 삭제하시겠습니까?');">Delete</a>
 		</tr>
 	</table>
 </div>
